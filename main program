@@ -1,0 +1,38 @@
+''' this program is made for finding the local time data and also for finding the time elapsed for any action, in this i have founded the elapsed time for led getting on and off 
+
+import machine
+import time 
+import utime
+rtc = machine.RTC()           #here we define the use of real time clock 
+rtc.datetime((2017, 8, 23, 11,54, 10,10,10 ))   # setting local time to esp8266
+stop= ([0])
+start=([0])
+a=0
+led = machine.Pin(16, machine.Pin.OUT)      # output pin for the led 
+print(rtc.datetime())
+while True:
+   
+    
+    n = input('enter 1 no')
+    if (n == '2'):
+        
+        led.on()
+        #utime.localtime()
+        start= utime.ticks_ms()
+       # utime.time()
+        
+        print( utime.localtime())
+        
+    elif (n == '1'):
+        led.off()
+        stop= utime.ticks_ms()
+        print (utime.localtime())
+        a= utime.ticks_diff(stop,start)                # for finding the time diffrence
+        sec= a/1000
+        print (sec)
+        stop= ([0])
+        start=([0])
+        
+        
+    
+
